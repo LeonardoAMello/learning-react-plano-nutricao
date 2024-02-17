@@ -1,32 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './UserProfileForm.css';
 
 const UserProfileForm = () => {
-  const [name, setName] = useState()
-  const [email, setEmail] = useState()
-  const [age, setAge] = useState()
-  const [bodyHeight, setBodyHeight] = useState()
-  const [bodyWeight, setBodyWeight] = useState()
-  const [workout, setWorkout] = useState()
-  const [workoutIntensity, setWorkoutIntensity] = useState()
-  const [workoutFrequency, setWorkoutFrequency] = useState()
-  const [cardio, setCardio] = useState()
-  const [cardioIntensity, setCardioIntensity] = useState()
-  const [cardioFrequency, setCardioFrequency] = useState()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [age, setAge] = useState("")
+  const [bodyHeight, setBodyHeight] = useState("")
+  const [bodyWeight, setBodyWeight] = useState("")
+  const [workout, setWorkout] = useState("")
+  const [workoutIntensity, setWorkoutIntensity] = useState("")
+  const [workoutFrequency, setWorkoutFrequency] = useState("")
+  const [cardio, setCardio] = useState("")
+  const [cardioIntensity, setCardioIntensity] = useState("")
+  const [cardioFrequency, setCardioFrequency] = useState("")
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // TODO: Fix this. The set function is setting the null value, but the variable itself changes only in the next call
-    if(workout !== "true") {
-      setWorkoutIntensity();
-      setWorkoutFrequency();
-    }
-
-    if(cardio !== "true") {
-      setCardioIntensity();
-      setCardioFrequency();
-    }
 
     let data = {
       "name": name,
@@ -44,19 +33,30 @@ const UserProfileForm = () => {
 
     console.log(data);
 
-    // Uncomment this when all others TODO resolved
-    // setName("");
-    // setEmail("");
-    // setAge("");
-    // setBodyHeight("");
-    // setBodyWeight("");
-    // setWorkout("");
-    // setWorkoutIntensity("");
-    // setWorkoutFrequency("");
-    // setCardio("");
-    // setCardioIntensity("");
-    // setCardioFrequency("");
+    setName("");
+    setEmail("");
+    setAge("");
+    setBodyHeight("");
+    setBodyWeight("");
+    setWorkout("");
+    setWorkoutIntensity("");
+    setWorkoutFrequency("");
+    setCardio("");
+    setCardioIntensity("");
+    setCardioFrequency("");
   };
+
+  useEffect(() => {
+    if(workout !== "true") {
+      setWorkoutIntensity("");
+      setWorkoutFrequency("");
+    }
+
+    if(cardio !== "true") {
+      setCardioIntensity("");
+      setCardioFrequency("");
+    }
+  }, [workout, cardio])
 
   return (
     <div>
@@ -66,7 +66,6 @@ const UserProfileForm = () => {
           <div className='form_row'>
             <label>
               <span>Nome</span>
-              {/* TODO: using onChange + value with a stateful variable is triggering a warning in the console. Need to fix that */}
               <input type="text" name='name' placeholder='Digite o seu nome' onChange={(e) => setName(e.target.value)} value={name} />
             </label>
             <label>
@@ -94,8 +93,8 @@ const UserProfileForm = () => {
           <div className='form_row'>
             <label>
               <span>Você realiza algum tipo de treino ou esporte?</span>
-              <select name="workout" defaultValue={"placeholder"} onChange={(e) => setWorkout(e.target.value)} value={workout} >
-                <option disabled hidden value="placeholder">Selecione</option>
+              <select name="workout" onChange={(e) => setWorkout(e.target.value)} value={workout} >
+                <option disabled hidden value="">Selecione</option>
                 <option value="true">Sim</option>
                 <option value="false">Não</option>
               </select>
@@ -105,8 +104,8 @@ const UserProfileForm = () => {
                 <div className='form_row'>
                   <label>
                     <span>Intensidade do treino ou esporte</span>
-                    <select name="workoutIntensity" defaultValue={"placeholder"} onChange={(e) => setWorkoutIntensity(e.target.value)} value={workoutIntensity} >
-                      <option disabled hidden value="placeholder">Selecione</option>
+                    <select name="workoutIntensity" onChange={(e) => setWorkoutIntensity(e.target.value)} value={workoutIntensity} >
+                      <option disabled hidden value="">Selecione</option>
                       <option value="low">Baixa</option>
                       <option value="medium">Média</option>
                       <option value="high">Alta</option>
@@ -116,8 +115,8 @@ const UserProfileForm = () => {
                 <div className='form_row'>
                   <label>
                     <span>Frequência</span>
-                    <select name="workoutFrequency" defaultValue={"placeholder"} onChange={(e) => setWorkoutFrequency(e.target.value)} value={workoutFrequency} >
-                      <option disabled hidden value="placeholder">Selecione</option>
+                    <select name="workoutFrequency" onChange={(e) => setWorkoutFrequency(e.target.value)} value={workoutFrequency} >
+                      <option disabled hidden value="">Selecione</option>
                       <option value="1">Eventualmente</option>
                       <option value="2">2-4 vezes por semana</option>
                       <option value="3">5-6 vezes por semana</option>
@@ -131,8 +130,8 @@ const UserProfileForm = () => {
           <div className='form_row'>
             <label>
               <span>Você realiza algum tipo de cardio?</span>
-              <select name="cardio" defaultValue={"placeholder"} onChange={(e) => setCardio(e.target.value)} value={cardio} >
-                <option disabled hidden value="placeholder">Selecione</option>
+              <select name="cardio" onChange={(e) => setCardio(e.target.value)} value={cardio} >
+                <option disabled hidden value="">Selecione</option>
                 <option value="true">Sim</option>
                 <option value="false">Não</option>
               </select>
@@ -142,8 +141,8 @@ const UserProfileForm = () => {
                 <div className='form_row'>
                   <label>
                     <span>Intensidade do cardio</span>
-                    <select name="cardioIntensity" defaultValue={"placeholder"} onChange={(e) => setCardioIntensity(e.target.value)} value={cardioIntensity} >
-                      <option disabled hidden value="placeholder">Selecione</option>
+                    <select name="cardioIntensity"onChange={(e) => setCardioIntensity(e.target.value)} value={cardioIntensity} >
+                      <option disabled hidden value="">Selecione</option>
                       <option value="low">Baixa</option>
                       <option value="medium">Média</option>
                       <option value="high">Alta</option>
@@ -153,8 +152,8 @@ const UserProfileForm = () => {
                 <div className='form_row'>
                   <label>
                     <span>Frequência</span>
-                    <select name="cardioFrequency" defaultValue={"placeholder"} onChange={(e) => setCardioFrequency(e.target.value)} value={cardioFrequency} >
-                      <option disabled hidden value="placeholder">Selecione</option>
+                    <select onChange={(e) => setCardioFrequency(e.target.value)} value={cardioFrequency} >
+                      <option disabled hidden value="">Selecione</option>
                       <option value="1">Eventualmente</option>
                       <option value="2">2-4 vezes por semana</option>
                       <option value="3">5-6 vezes por semana</option>
